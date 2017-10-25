@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Tue Oct 24 17:35:29 2017
+# Generated: Wed Oct 25 17:08:49 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -231,9 +231,14 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_multiply_xx_0_0 = blocks.multiply_vcc(1)
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/Users/fredcurti/Desktop/projeto8-camfis/Drummond-residos.txt', True)
         self.blocks_complex_to_real_1 = blocks.complex_to_real(1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
+        self.blks2_tcp_source_0 = grc_blks2.tcp_source(
+        	itemsize=gr.sizeof_char*1,
+        	addr='127.0.0.1',
+        	port=4321,
+        	server=True,
+        )
         self.blks2_tcp_sink_0 = grc_blks2.tcp_sink(
         	itemsize=gr.sizeof_char*1,
         	addr='127.0.0.1',
@@ -271,10 +276,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.audio_source_0, 0), (self.qtgui_time_sink_x_0_0, 0))    
         self.connect((self.blks2_packet_decoder_0, 0), (self.blks2_tcp_sink_0, 0))    
         self.connect((self.blks2_packet_encoder_0, 0), (self.digital_constellation_modulator_0, 0))    
+        self.connect((self.blks2_tcp_source_0, 0), (self.blks2_packet_encoder_0, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.digital_binary_slicer_fb_0, 0))    
         self.connect((self.blocks_complex_to_real_1, 0), (self.audio_sink_0, 0))    
         self.connect((self.blocks_complex_to_real_1, 0), (self.qtgui_time_sink_x_0, 0))    
-        self.connect((self.blocks_file_source_0, 0), (self.blks2_packet_encoder_0, 0))    
         self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_multiply_xx_0_0, 0))    
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_complex_to_real_1, 0))    
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.low_pass_filter_0, 0))    

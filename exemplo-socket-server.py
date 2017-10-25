@@ -14,10 +14,9 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Bind the socket to the port
-    server_address = ('0.0.0.0', PORTA)
+    server_address = ('localhost', PORTA)
     print("PORTA {}".format(PORTA))
     sock.bind(server_address)
-
     # Listen for incoming connections
     sock.listen(1)
     string = ''
@@ -32,7 +31,7 @@ def main():
             # Receive the data in small chunks and retransmit it
             while True:
                 data = connection.recv(16)
-                string += data
+                string += str(data,'utf-8')
                 print("{}".format(string))
                 if(len(data) <= 0):
                     break
