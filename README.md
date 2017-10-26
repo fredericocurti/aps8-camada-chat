@@ -25,7 +25,7 @@ BPSK significa Binary Phase Shift Keying, ou seja, é um tipo de modulação dig
 
 #### Gráfico no tempo e em frequência do sinal não codificado
 ![diagrama de camada](./img/TX1T.png)
-![diagrama de camada](./img/TX1F.png)
+![diagrama de camada](./img/TX1F.png) 
 
 
 #### Gráfico no tempo e em frequência do sinal codificado
@@ -36,6 +36,11 @@ BPSK significa Binary Phase Shift Keying, ou seja, é um tipo de modulação dig
 #### Gráfico no tempo e em frequência do sinal modulado
 ![diagrama de camada](./img/TX3T.png)
 ![diagrama de camada](./img/TX3F.png)
+
+
+#### Diagrama de constelação
+![diagrama de camada](./img/TX4.png)
+
 
 
 ### RX
