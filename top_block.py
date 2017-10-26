@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Thu Oct 26 13:23:06 2017
+# Generated: Thu Oct 26 13:37:27 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -77,7 +77,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self._fc_slider_range = Range(0, 18200, 200, 2200, 150)
         self._fc_slider_win = RangeWidget(self._fc_slider_range, self.set_fc_slider, 'fc', "counter_slider", float)
         self.top_layout.addWidget(self._fc_slider_win)
-        self.qtgui_time_sink_x_1 = qtgui.time_sink_c(
+        self.qtgui_time_sink_x_1 = qtgui.time_sink_f(
         	1024, #size
         	samp_rate, #samp_rate
         	"", #name
@@ -111,12 +111,9 @@ class top_block(gr.top_block, Qt.QWidget):
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
         
-        for i in xrange(2*1):
+        for i in xrange(1):
             if len(labels[i]) == 0:
-                if(i % 2 == 0):
-                    self.qtgui_time_sink_x_1.set_line_label(i, "Re{{Data {0}}}".format(i/2))
-                else:
-                    self.qtgui_time_sink_x_1.set_line_label(i, "Im{{Data {0}}}".format(i/2))
+                self.qtgui_time_sink_x_1.set_line_label(i, "Data {0}".format(i))
             else:
                 self.qtgui_time_sink_x_1.set_line_label(i, labels[i])
             self.qtgui_time_sink_x_1.set_line_width(i, widths[i])
@@ -127,7 +124,7 @@ class top_block(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_1_win = sip.wrapinstance(self.qtgui_time_sink_x_1.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_1_win)
-        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
+        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_f(
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
         	0, #fc
@@ -148,7 +145,7 @@ class top_block(gr.top_block, Qt.QWidget):
         if not True:
           self.qtgui_freq_sink_x_0.disable_legend()
         
-        if "complex" == "float" or "complex" == "msg_float":
+        if "float" == "float" or "float" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
         
         labels = ['', '', '', '', '',
@@ -232,6 +229,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blocks_complex_to_real_1 = blocks.complex_to_real(1)
         self.blocks_complex_to_real_0 = blocks.complex_to_real(1)
+        self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.blks2_tcp_source_0 = grc_blks2.tcp_source(
         	itemsize=gr.sizeof_char*1,
         	addr='127.0.0.1',
@@ -273,8 +271,11 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_multiply_xx_0_0, 1))    
         self.connect((self.audio_source_0, 0), (self.blocks_float_to_complex_0, 0))    
         self.connect((self.blks2_packet_decoder_0, 0), (self.blks2_tcp_sink_0, 0))    
+        self.connect((self.blks2_packet_encoder_0, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.blks2_packet_encoder_0, 0), (self.digital_constellation_modulator_0, 0))    
         self.connect((self.blks2_tcp_source_0, 0), (self.blks2_packet_encoder_0, 0))    
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_freq_sink_x_0, 0))    
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.blocks_complex_to_real_0, 0), (self.digital_binary_slicer_fb_0, 0))    
         self.connect((self.blocks_complex_to_real_1, 0), (self.audio_sink_0, 0))    
         self.connect((self.blocks_float_to_complex_0, 0), (self.blocks_multiply_xx_0_0, 0))    
