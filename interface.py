@@ -43,8 +43,6 @@ class Janela_Principal():
 
         self.textView = Text(self.window, height=15, width=85)
         self.textView.grid(row=1 ,column = 0, sticky = "nsew")
-        # quote = """Conversa"""
-        # self.textView.insert(END, quote)
 
         # Botoes
         self.textField = Text(self.window, height=1, width = 1)

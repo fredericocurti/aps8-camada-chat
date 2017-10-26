@@ -4,7 +4,6 @@
 ## https://pymotw.com/2/socket/tcp.html
 
 import socket
-import sys
 
 class Receptor:
     def __init__(self):
